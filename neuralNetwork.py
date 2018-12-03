@@ -1,7 +1,4 @@
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
 
@@ -20,12 +17,14 @@ y_train = scaler.fit_transform(df_train['median_house_value'].as_matrix())
 X_test = scaler.fit_transform(df_test.drop(['median_house_value'],axis=1).as_matrix())
 y_test = scaler.fit_transform(df_test['median_house_value'].as_matrix())
 
+# NOT SURE IF WE SHOULD BE NORMALISING THE DATA HERE AND THEN DENORMALISING IT RATHER THAN NORMALISING IT BEFORE HAND
 def denormalise(df,normalised_data):
     df = df['median_house_value'].values.reshape(-1,1)
     normalised_data = normalised_data.reshape(-1,1)
     scale = MinMaxScaler()
-    s = scale.fit_transform(df)
-    new = scale.inverse_transform(normalised_data)
+    original = scale.fit_transform(df)
+    re_scaled = original.inverse_transform(normalised_data)
+ 
 
 l1_nodes = 12
 l2_nodes = 8
@@ -75,7 +74,7 @@ with tf.Session() as sess:
     for iteration in range(num_iterations):
         for i in range(X_train.shape[0]):
             sess.run([loss,train],feed_dict = {xs:X_train[i,:].reshape(1,3), ys:y_train[i]})
-            # Run cost and train with each sample
+          
 
         training_loss.append(sess.run(loss, feed_dict={xs:X_train,ys:y_train}))
         test_loss.append(sess.run(loss, feed_dict={xs:X_test,ys:y_test}))
