@@ -47,23 +47,25 @@ def lr_evaluate(housing):
     print("Average validation r2 score: " + str(avg_test_err))
     print("Average of training and validation r2 score: " + str((avg_train_err + avg_test_err) / 2))
 
-housing1 = read_housing_data()
-housing2 = read_housing_data()
-housing3 = read_housing_data()
-housing4 = read_housing_data()
+#If __name__ so I can import it in SVM
+if __name__ == "__main__":
+    housing1 = read_housing_data()
+    housing2 = read_housing_data()
+    housing3 = read_housing_data()
+    housing4 = read_housing_data()
 
-Impute.remove_incomplete_entries(housing1)
-print("Evaluation of remove incomplete entries approach")
-lr_evaluate(housing1)
+    Impute.remove_incomplete_entries(housing1)
+    print("Evaluation of remove incomplete entries approach")
+    lr_evaluate(housing1)
 
-Impute.fill_average(housing2)
-print("Evaluation of fill with average approach")
-lr_evaluate(housing2)
+    Impute.fill_average(housing2)
+    print("Evaluation of fill with average approach")
+    lr_evaluate(housing2)
 
-Impute.fill_lr_prediction_from_other_column(housing3, 'total_rooms')
-print("Evaluation of linear regression approach")
-lr_evaluate(housing3)
+    Impute.fill_lr_prediction_from_other_column(housing3, 'total_rooms')
+    print("Evaluation of linear regression approach")
+    lr_evaluate(housing3)
 
-Impute.fill_nn_prediction(housing4, 4)
-print("Evaluation of nearest neighbours approach")
-lr_evaluate(housing4)
+    Impute.fill_nn_prediction(housing4, 4)
+    print("Evaluation of nearest neighbours approach")
+    lr_evaluate(housing4)
