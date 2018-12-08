@@ -1,10 +1,3 @@
-import pandas
-
-def read_housing_data():
-    housing = pandas.read_csv("./housing.csv")
-    transform_ocean_proximity(housing)
-    return housing
-
 def transform_ocean_proximity(housing):
     housing['1h_ocean'] = [1 if i=='<1H OCEAN' else 0 for i in housing.ocean_proximity.values]
     housing['island'] = [1 if i=='ISLAND' else 0 for i in housing.ocean_proximity.values]

@@ -11,7 +11,9 @@ FEATURES = ['longitude','latitude','housing_median_age','total_rooms','total_bed
 
 def load_data(incomplete = 0):
     # I have put read_housing_data function in a separate file so changed a bit on naming
-    housing_data = DataPrepUtil.read_housing_data()
+    housing_data = pandas.read_csv('./housing.csv')
+    DataPrepUtil.transform_ocean_proximity(housing_data)
+    
     if incomplete == 0:
         Impute.remove_incomplete_entries(housing_data)
     return housing_data
