@@ -1,5 +1,5 @@
 import Impute
-import Imputaion_approaches_evaluation
+import DataPrepUtil
 import random
 import numpy as np
 from sklearn import svm
@@ -10,7 +10,8 @@ FEATURES = ['longitude','latitude','housing_median_age','total_rooms','total_bed
 
 
 def load_data(incomplete = 0):
-    housing_data = Imputaion_approaches_evaluation.read_housing_data()
+    # I have put read_housing_data function in a separate file so changed a bit on naming
+    housing_data = DataPrepUtil.read_housing_data()
     if incomplete == 0:
         Impute.remove_incomplete_entries(housing_data)
     return housing_data
