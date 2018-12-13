@@ -18,6 +18,10 @@ housing = pandas.read_csv('housing.csv')
 DataPrepUtil.transform_ocean_proximity(housing)
 Impute.fill_lr_prediction_from_other_column(housing, 'total_rooms')
 
+StandardScaler = preprocessing.StandardScaler()
+MaxAbsScaler = preprocessing.MaxAbsScaler()
+MinMaxScaler = preprocessing.MinMaxScaler()
+RobustScaler = preprocessing.RobustScaler()
 
 scaled_1 = pandas.DataFrame(preprocessing.StandardScaler().fit_transform(housing))
 scaled_2 = pandas.DataFrame(preprocessing.MaxAbsScaler().fit_transform(housing))
@@ -73,4 +77,6 @@ for i in (scaled_1, scaled_2, scaled_3, scaled_4):
     
     print('Average test R^2 scorefor ', scaler_names[scaler_count], ': ', test_R2_average, '\n')
     scaler_count += 1
+    
+housing = scaled_1
     
