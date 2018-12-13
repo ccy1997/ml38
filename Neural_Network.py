@@ -16,8 +16,10 @@ housing = pandas.read_csv('housing.csv')
 DataPrepUtil.transform_ocean_proximity(housing)
 Impute.fill_lr_prediction_from_other_column(housing, 'total_rooms')
 
-preprocessing.StandardScaler().fit(housing)
-df = standard.transform(housing)
+# Normalisation of data (feature scaling)
+scaled = pandas.DataFrame(preprocessing.StandardScaler().fit_transform(housing))
+scaled.columns = housing.columns
+housing = scaled
 
 median_house_value_bc, maxlog, interval = stats.boxcox(housing.median_house_value, alpha=0.05)
 population_bc, maxlog, interval = stats.boxcox(housing.population, alpha=0.05)

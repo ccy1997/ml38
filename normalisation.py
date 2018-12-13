@@ -18,10 +18,6 @@ housing = pandas.read_csv('housing.csv')
 DataPrepUtil.transform_ocean_proximity(housing)
 Impute.fill_lr_prediction_from_other_column(housing, 'total_rooms')
 
-StandardScaler = preprocessing.StandardScaler()
-MaxAbsScaler = preprocessing.MaxAbsScaler()
-MinMaxScaler = preprocessing.MinMaxScaler()
-RobustScaler = preprocessing.RobustScaler()
 
 scaled_1 = pandas.DataFrame(preprocessing.StandardScaler().fit_transform(housing))
 scaled_2 = pandas.DataFrame(preprocessing.MaxAbsScaler().fit_transform(housing))
